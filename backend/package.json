@@ -1,0 +1,17 @@
+{
+  "name": "todo",
+  "version": "0.0.1",
+  "description": "A todo app",
+  "main": "index.ts",
+  "scripts": {
+    "start": "node dist/index",
+    "compile": "tsc src/*.ts --outDir dist -w"
+  },
+  "author": "N. Prochnau",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg": "^8.1.0",
+    "typescript": "^3.8.3"
+  }
+}
