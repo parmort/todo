@@ -63,7 +63,7 @@ router.get('/:id', function (req, res) { return __awaiter(void 0, void 0, void 0
             case 0: return [4 /*yield*/, db_1.Todo.find(req.params.id)];
             case 1:
                 rows = (_a.sent()).rows;
-                res.send(rows);
+                res.send(rows[0]);
                 return [2 /*return*/];
         }
     });
@@ -75,7 +75,7 @@ router.post('/', function (req, res) { return __awaiter(void 0, void 0, void 0, 
             case 0: return [4 /*yield*/, db_1.Todo.create(req.body.name)];
             case 1:
                 rows = (_a.sent()).rows;
-                res.send(rows);
+                res.send(rows[0]);
                 return [2 /*return*/];
         }
     });
@@ -87,7 +87,7 @@ router.put('/:id', function (req, res) { return __awaiter(void 0, void 0, void 0
             case 0: return [4 /*yield*/, db_1.Todo.update(req.params.id, req.body.name)];
             case 1:
                 rows = (_a.sent()).rows;
-                res.send(rows);
+                res.send(rows[0]);
                 return [2 /*return*/];
         }
     });
@@ -99,7 +99,7 @@ router["delete"]('/:id', function (req, res) { return __awaiter(void 0, void 0, 
             case 0: return [4 /*yield*/, db_1.Todo.destroy(req.params.id)];
             case 1:
                 rows = (_a.sent()).rows;
-                res.send(rows);
+                res.send(rows[0]);
                 return [2 /*return*/];
         }
     });

@@ -5,12 +5,12 @@ const router = Router();
 
 router.post('/:id', async (req, res) => {
   const { rows } = await Todo.complete(req.params.id);
-  res.send(rows);
+  res.send(rows[0]);
 });
 
 router.delete('/:id', async (req, res) => {
   const { rows } = await Todo.uncomplete(req.params.id);
-  res.send(rows);
+  res.send(rows[0]);
 });
 
 export default router;

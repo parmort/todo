@@ -12,22 +12,22 @@ router.get('/', async (_, res) => {
 
 router.get('/:id', async (req, res) => {
   const { rows } = await Todo.find(req.params.id);
-  res.send(rows);
+  res.send(rows[0]);
 });
 
 router.post('/', async (req, res) => {
   const { rows } = await Todo.create(req.body.name);
-  res.send(rows);
+  res.send(rows[0]);
 });
 
 router.put('/:id', async (req, res) => {
   const { rows } = await Todo.update(req.params.id, req.body.name);
-  res.send(rows);
+  res.send(rows[0]);
 });
 
 router.delete('/:id', async (req, res) => {
   const { rows } = await Todo.destroy(req.params.id);
-  res.send(rows);
+  res.send(rows[0]);
 });
 
 export default router;
