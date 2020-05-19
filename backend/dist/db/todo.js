@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -79,23 +90,69 @@ function create(name) {
         });
     });
 }
-function update(id, values) {
-    return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
-        return [2 /*return*/];
-    }); });
+function update(id, name) {
+    return __awaiter(this, void 0, void 0, function () {
+        var res, _a, rows, rowCount;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0: return [4 /*yield*/, db_1["default"].query('UPDATE todos SET name = $1 WHERE id = $2', [
+                        name,
+                        id,
+                    ])];
+                case 1:
+                    res = _b.sent();
+                    return [4 /*yield*/, db_1["default"].query('SELECT * FROM todos WHERE id = $1', [id])];
+                case 2:
+                    _a = _b.sent(), rows = _a.rows, rowCount = _a.rowCount;
+                    return [2 /*return*/, __assign(__assign({}, res), { rows: rows, rowCount: rowCount })];
+            }
+        });
+    });
+}
+function complete(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        var res, _a, rows, rowCount;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0: return [4 /*yield*/, db_1["default"].query('UPDATE todos SET complete = true WHERE id = $1', [id])];
+                case 1:
+                    res = _b.sent();
+                    return [4 /*yield*/, db_1["default"].query('SELECT * FROM todos WHERE id = $1', [id])];
+                case 2:
+                    _a = _b.sent(), rows = _a.rows, rowCount = _a.rowCount;
+                    return [2 /*return*/, __assign(__assign({}, res), { rows: rows, rowCount: rowCount })];
+            }
+        });
+    });
+}
+function uncomplete(id) {
+    return __awaiter(this, void 0, void 0, function () {
+        var res, _a, rows, rowCount;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0: return [4 /*yield*/, db_1["default"].query('UPDATE todos SET complete = false WHERE id = $1', [id])];
+                case 1:
+                    res = _b.sent();
+                    return [4 /*yield*/, db_1["default"].query('SELECT * FROM todos WHERE id = $1', [id])];
+                case 2:
+                    _a = _b.sent(), rows = _a.rows, rowCount = _a.rowCount;
+                    return [2 /*return*/, __assign(__assign({}, res), { rows: rows, rowCount: rowCount })];
+            }
+        });
+    });
 }
 function destroy(id) {
     return __awaiter(this, void 0, void 0, function () {
-        var row;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var _a, rows, rowCount, res;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0: return [4 /*yield*/, db_1["default"].query('SELECT * FROM todos WHERE id = $1', [id])];
                 case 1:
-                    row = _a.sent();
+                    _a = _b.sent(), rows = _a.rows, rowCount = _a.rowCount;
                     return [4 /*yield*/, db_1["default"].query('DELETE FROM todos WHERE id = $1', [id])];
                 case 2:
-                    _a.sent();
-                    return [2 /*return*/, row];
+                    res = _b.sent();
+                    return [2 /*return*/, __assign(__assign({}, res), { rows: rows, rowCount: rowCount })];
             }
         });
     });
@@ -105,6 +162,8 @@ var Todo = {
     find: find,
     create: create,
     update: update,
+    complete: complete,
+    uncomplete: uncomplete,
     destroy: destroy
 };
 exports.Todo = Todo;

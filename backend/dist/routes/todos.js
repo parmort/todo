@@ -41,7 +41,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 exports.__esModule = true;
 var express_promise_router_1 = __importDefault(require("express-promise-router"));
 var db_1 = require("../db");
+var complete_todos_1 = __importDefault(require("./complete_todos"));
 var router = express_promise_router_1["default"]();
+router.use('/complete', complete_todos_1["default"]);
 router.get('/', function (_, res) { return __awaiter(void 0, void 0, void 0, function () {
     var rows;
     return __generator(this, function (_a) {
@@ -78,10 +80,18 @@ router.post('/', function (req, res) { return __awaiter(void 0, void 0, void 0, 
         }
     });
 }); });
-/* router.put('/:id', async (req, res) => { */
-/*   const { rows } = await Todo.update(req.params.id, req.body); */
-/*   res.send(rows); */
-/* }); */
+router.put('/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var rows;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, db_1.Todo.update(req.params.id, req.body.name)];
+            case 1:
+                rows = (_a.sent()).rows;
+                res.send(rows);
+                return [2 /*return*/];
+        }
+    });
+}); });
 router["delete"]('/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var rows;
     return __generator(this, function (_a) {

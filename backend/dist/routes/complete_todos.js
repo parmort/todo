@@ -42,11 +42,11 @@ exports.__esModule = true;
 var express_promise_router_1 = __importDefault(require("express-promise-router"));
 var db_1 = require("../db");
 var router = express_promise_router_1["default"]();
-router.get('/', function (_, res) { return __awaiter(void 0, void 0, void 0, function () {
+router.post('/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var rows;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, db_1.Todo.findAll()];
+            case 0: return [4 /*yield*/, db_1.Todo.complete(req.params.id)];
             case 1:
                 rows = (_a.sent()).rows;
                 res.send(rows);
@@ -54,39 +54,11 @@ router.get('/', function (_, res) { return __awaiter(void 0, void 0, void 0, fun
         }
     });
 }); });
-router.get('/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var rows;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, db_1.Todo.find(req.params.id)];
-            case 1:
-                rows = (_a.sent()).rows;
-                res.send(rows);
-                return [2 /*return*/];
-        }
-    });
-}); });
-router.post('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var rows;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0: return [4 /*yield*/, db_1.Todo.create(req.body.name)];
-            case 1:
-                rows = (_a.sent()).rows;
-                res.send(rows);
-                return [2 /*return*/];
-        }
-    });
-}); });
-/* router.put('/:id', async (req, res) => { */
-/*   const { rows } = await Todo.update(req.params.id, req.body); */
-/*   res.send(rows); */
-/* }); */
 router["delete"]('/:id', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var rows;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, db_1.Todo.destroy(req.params.id)];
+            case 0: return [4 /*yield*/, db_1.Todo.uncomplete(req.params.id)];
             case 1:
                 rows = (_a.sent()).rows;
                 res.send(rows);
