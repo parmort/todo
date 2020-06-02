@@ -31,4 +31,10 @@ export class TodoComponent {
       });
     });
   }
+
+  delete(): void {
+    this.todoService.deleteTodo(this.todo.id).subscribe(_ => {
+      this.update.emit('delete');
+    });
+  }
 }

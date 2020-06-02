@@ -4,5 +4,7 @@
   <li *ngIf="todo.complete">
     <button (click)="uncomplete()">Uncomplete</button>
   </li>
+  <li><button [routerLink]="[todo.id, 'edit']">Edit</button></li>
+  <li><button (click)="delete()">Delete</button></li>
 </ul>
 <p *ngIf="todo.complete">Complete</p>
