@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateTodoComponent } from './create-todo.component';
+import { NavComponent } from './nav.component';
 
-describe('CreateTodoComponent', () => {
-  let component: CreateTodoComponent;
-  let fixture: ComponentFixture<CreateTodoComponent>;
+describe('NavComponent', () => {
+  let component: NavComponent;
+  let fixture: ComponentFixture<NavComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateTodoComponent ]
+      declarations: [ NavComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateTodoComponent);
+    fixture = TestBed.createComponent(NavComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

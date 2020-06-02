@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EditTodoComponent } from './edit-todo.component';
+import { TodoFormDialogComponent } from './todo-form-dialog.component';
 
-describe('EditTodoComponent', () => {
-  let component: EditTodoComponent;
-  let fixture: ComponentFixture<EditTodoComponent>;
+describe('TodoFormDialogComponent', () => {
+  let component: TodoFormDialogComponent;
+  let fixture: ComponentFixture<TodoFormDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditTodoComponent ]
+      declarations: [ TodoFormDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EditTodoComponent);
+    fixture = TestBed.createComponent(TodoFormDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

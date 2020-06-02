@@ -1,0 +1,27 @@
+a {
+  &#title {
+    color: white;
+    text-decoration: none;
+
+    &:visited {
+      color: white;
+    }
+  }
+
+  &.link {
+    margin-left: 15px;
+  }
+}
+
+div.flex {
+  display: flex;
+
+  div {
+    flex: 1;
+
+    &.child {
+      padding-top: 10px;
+      flex: 3;
+    }
+  }
+}
