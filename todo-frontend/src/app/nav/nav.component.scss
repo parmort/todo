@@ -12,16 +12,3 @@ a {
     margin-left: 15px;
   }
 }
-
-div.flex {
-  display: flex;
-
-  div {
-    flex: 1;
-
-    &.child {
-      padding-top: 10px;
-      flex: 3;
-    }
-  }
-}
