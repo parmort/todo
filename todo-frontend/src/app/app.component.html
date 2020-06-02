@@ -1,5 +1,9 @@
-<ul>
-  <li><a routerLink="">Home</a></li>
-  <li><a routerLink="create">Create Todo</a></li>
-</ul>
-<router-outlet></router-outlet>
+<mat-toolbar color="primary">
+  <a id="title" routerLink="">Todo App</a>
+  <a class="link" mat-button routerLink="create">Create Todo</a>
+</mat-toolbar>
+<div class="flex">
+  <div></div>
+  <div class="child"><router-outlet></router-outlet></div>
+  <div></div>
+</div>
