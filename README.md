@@ -11,6 +11,9 @@ want to accomplish, however:
 - [ ] Add 'flash' messages
 - [ ] Test the backend
 - [ ] Test the frontend
+- [ ] Refactor to use [ngrx][ngrx]
+
+[ngrx]: https://ngrx.io
 
 More information on each part of the application can be found in the README for
 each specific project.
