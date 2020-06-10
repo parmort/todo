@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { timer } from 'rxjs';
-import { TodoService } from '../core/todo/todo.service';
+import { TodoService } from '../core/todo.service';
 import { TodoFormDialogComponent } from '../todo-form-dialog/todo-form-dialog.component';
 import { Todo } from '../core/todo/todo.model';
 

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { TodoService } from '../core/todo/todo.service';
-import { Todo, TodoSorters } from '../core/todo/todo.model';
+import { Store, select } from '@ngrx/store';
+import { load } from '../core/todo/todo.actions';
+import { selectTodos } from '../core/todo/todo.selectors';
+import { Todo } from '../core/todo/todo.model';
+import { AppState } from '../core/app.state';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,22 +12,16 @@ import { Todo, TodoSorters } from '../core/todo/todo.model';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  todos: Observable<Todo[]>;
+  todos$: Observable<Todo[]>;
 
-  constructor(private todoService: TodoService, private router: Router) {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
     this.update();
-    this.router.events.subscribe(e => {
-      if (e instanceof NavigationEnd && e.url === '/') {
-        this.update();
-      }
-    });
+    this.todos$ = this.store.pipe(select(selectTodos));
   }
 
   update(): void {
-    this.todos = this.todoService
-      .getTodos()
-      .pipe(map((t: Todo[]) => t.sort(TodoSorters.byComplete)));
+    this.store.dispatch(load());
   }
 }

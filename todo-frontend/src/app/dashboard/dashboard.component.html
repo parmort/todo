@@ -1,3 +1,3 @@
-<div *ngFor="let todo of todos | async">
+<div *ngFor="let todo of todos$ | async">
   <app-todo [todo]="todo" (update)="update()"></app-todo>
 </div>

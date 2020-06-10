@@ -4,6 +4,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { CoreModule } from './core/core.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+import { reducer as todoReducer } from './core/todo/todo.reducer';
+import { TodoEffects } from './core/todo/todo.effects';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -20,6 +25,16 @@ import { TodoComponent } from './todo/todo.component';
 import { TodoFormDialogComponent } from './todo-form-dialog/todo-form-dialog.component';
 import { NavComponent } from './nav/nav.component';
 
+const matImports = [
+  MatFormFieldModule,
+  MatInputModule,
+  MatToolbarModule,
+  MatListModule,
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,13 +50,9 @@ import { NavComponent } from './nav/nav.component';
     BrowserAnimationsModule,
     FormsModule,
     CoreModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatToolbarModule,
-    MatListModule,
-    MatButtonModule,
-    MatCardModule,
-    MatDialogModule,
+    StoreModule.forRoot({ todos: todoReducer }),
+    EffectsModule.forRoot([TodoEffects]),
+    ...matImports,
   ],
   bootstrap: [AppComponent],
 })
