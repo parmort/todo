@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { TodoFormDialogComponent } from '../todo-form-dialog/todo-form-dialog.component';
-import { TodoService } from '../todo.service';
+import { TodoService } from '../core/todo/todo.service';
 
 @Component({
   selector: 'app-nav',

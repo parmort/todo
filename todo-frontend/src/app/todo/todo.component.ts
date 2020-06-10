@@ -1,9 +1,9 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { timer } from 'rxjs';
-import { TodoService } from '../todo.service';
+import { TodoService } from '../core/todo/todo.service';
 import { TodoFormDialogComponent } from '../todo-form-dialog/todo-form-dialog.component';
-import { Todo } from '../todo.model';
+import { Todo } from '../core/todo/todo.model';
 
 @Component({
   selector: 'app-todo',

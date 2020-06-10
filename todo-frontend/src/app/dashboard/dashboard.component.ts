@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { TodoService } from '../todo.service';
-import { Todo, TodoSorters } from '../todo.model';
+import { TodoService } from '../core/todo/todo.service';
+import { Todo, TodoSorters } from '../core/todo/todo.model';
 
 @Component({
   selector: 'app-dashboard',
