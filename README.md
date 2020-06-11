@@ -11,7 +11,10 @@ want to accomplish, however:
 - [ ] Add 'flash' messages
 - [ ] Test the backend
 - [ ] Test the frontend
-- [ ] Refactor to use [ngrx][ngrx]
+- [x] ~Refactor to use [ngrx][ngrx]~
+
+> **NOTE:** Add tests first! Even better, use TDD. I refactored to use ngrx
+> first, tests would have made life a little easier.
 
 [ngrx]: https://ngrx.io
 

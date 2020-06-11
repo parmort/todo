@@ -4,7 +4,6 @@
 <mat-card-actions>
   <button mat-button color="accent" *ngIf="!todo.complete" (click)="complete()">Complete</button>
   <button mat-button color="accent" *ngIf="todo.complete" (click)="uncomplete()">Uncomplete</button>
-  <!-- <button mat-button color="accent" [routerLink]="[todo.id, 'edit']">Edit</button> -->
   <button mat-button color="accent" (click)="edit()">Edit</button>
   <button mat-button color="warn" (click)="delete()">Delete</button>
 </mat-card-actions>

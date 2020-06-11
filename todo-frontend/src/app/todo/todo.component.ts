@@ -1,9 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { timer } from 'rxjs';
-import { TodoService } from '../todo.service';
 import { TodoFormDialogComponent } from '../todo-form-dialog/todo-form-dialog.component';
-import { Todo } from '../todo.model';
+import { Todo } from '../core/todo/todo.model';
+import { Store } from '@ngrx/store';
+import { AppState } from '../core/app.state';
+import * as TodoActions from '../core/todo/todo.actions';
 
 @Component({
   selector: 'app-todo',
@@ -12,32 +13,22 @@ import { Todo } from '../todo.model';
 })
 export class TodoComponent {
   @Input() todo: Todo;
-  @Output() update = new EventEmitter<string>();
 
-  constructor(private todoService: TodoService, private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private store: Store<AppState>
+  ) {}
 
   complete(): void {
-    this.todoService.complete(this.todo.id).subscribe((t: Todo) => {
-      timer(150).subscribe(_ => {
-        this.todo = t;
-        this.update.emit('complete');
-      });
-    });
+    this.store.dispatch(TodoActions.complete({ id: this.todo.id }));
   }
 
   uncomplete(): void {
-    this.todoService.uncomplete(this.todo.id).subscribe((t: Todo) => {
-      timer(150).subscribe(_ => {
-        this.todo = t;
-        this.update.emit('uncomplete');
-      });
-    });
+    this.store.dispatch(TodoActions.uncomplete({ id: this.todo.id }));
   }
 
   delete(): void {
-    this.todoService.deleteTodo(this.todo.id).subscribe(_ => {
-      this.update.emit('delete');
-    });
+    this.store.dispatch(TodoActions.destroy({ id: this.todo.id }));
   }
 
   edit(): void {
@@ -45,13 +36,11 @@ export class TodoComponent {
       data: { name: this.todo.name },
     });
 
-    formDialog
-      .afterClosed()
-      .subscribe(res => {
-        if (!res) return;
-        this.todoService
-          .editTodo(this.todo.id, res)
-          .subscribe(_ => this.update.emit('edit'))
-      });
+    formDialog.afterClosed().subscribe(formData => {
+      if (!formData) return;
+      this.store.dispatch(
+        TodoActions.edit({ id: this.todo.id, data: formData })
+      );
+    });
   }
 }
