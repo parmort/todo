@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { TodoFormDialogComponent } from '../todo-form-dialog/todo-form-dialog.component';
@@ -11,16 +10,11 @@ import * as TodoActions from '../core/todo/todo.actions';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
 })
-export class NavComponent implements OnInit {
+export class NavComponent {
   constructor(
     private dialog: MatDialog,
-    private router: Router,
     private store: Store<AppState>
   ) {}
-
-  ngOnInit(): void {
-    this.router.onSameUrlNavigation = 'reload';
-  }
 
   openCreate(): void {
     const formDialog = this.dialog.open(TodoFormDialogComponent, {

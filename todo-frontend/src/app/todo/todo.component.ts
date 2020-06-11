@@ -1,6 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { TodoService } from '../core/todo.service';
 import { TodoFormDialogComponent } from '../todo-form-dialog/todo-form-dialog.component';
 import { Todo } from '../core/todo/todo.model';
 import { Store } from '@ngrx/store';
@@ -14,10 +13,8 @@ import * as TodoActions from '../core/todo/todo.actions';
 })
 export class TodoComponent {
   @Input() todo: Todo;
-  @Output() update = new EventEmitter<string>();
 
   constructor(
-    private todoService: TodoService,
     private dialog: MatDialog,
     private store: Store<AppState>
   ) {}
