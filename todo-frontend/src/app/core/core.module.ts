@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { TodoService } from './todo/todo.service';
+import { TodoService } from './todo.service';
 
 // prettier-ignore
 @NgModule({

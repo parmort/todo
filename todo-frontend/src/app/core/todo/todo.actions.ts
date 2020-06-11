@@ -20,9 +20,19 @@ export const complete = createAction(
   props<{ id: number }>()
 );
 
+export const completeSuccess = createAction(
+  '[Todo] Complete Success',
+  props<{ payload: Todo }>()
+);
+
 export const uncomplete = createAction(
   '[Todo] Uncomplete',
   props<{ id: number }>()
+);
+
+export const uncompleteSuccess = createAction(
+  '[Todo] Uncomplete Success',
+  props<{ payload: Todo }>()
 );
 
 export const destroy = createAction('[Todo] Destroy', props<{ id: number }>());
