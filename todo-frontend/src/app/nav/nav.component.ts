@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 import { TodoFormDialogComponent } from '../todo-form-dialog/todo-form-dialog.component';
-import { TodoService } from '../core/todo.service';
+import { AppState } from '../core/app.state';
+import * as TodoActions from '../core/todo/todo.actions';
 
 @Component({
   selector: 'app-nav',
@@ -13,7 +15,7 @@ export class NavComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private router: Router,
-    private todoService: TodoService
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
@@ -25,11 +27,9 @@ export class NavComponent implements OnInit {
       data: { name: '' },
     });
 
-    formDialog.afterClosed().subscribe(res => {
-      if (!res) return;
-      this.todoService
-        .createTodo(res)
-        .subscribe(_ => this.router.navigateByUrl(''));
+    formDialog.afterClosed().subscribe(data => {
+      if (!data) return;
+      this.store.dispatch(TodoActions.create(data));
     });
   }
 }

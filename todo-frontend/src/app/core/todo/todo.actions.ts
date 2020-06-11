@@ -10,9 +10,19 @@ export const loadSuccess = createAction(
 
 export const create = createAction('[Todo] Create', props<{ name: string }>());
 
-export const update = createAction(
+export const createSuccess = createAction(
+  '[Todo] Create Success',
+  props<{ payload: Todo }>()
+);
+
+export const edit = createAction(
   '[Todo] Update',
-  props<{ id: number; name: string }>()
+  props<{ id: number; data: { name: string } }>()
+);
+
+export const editSuccess = createAction(
+  '[Todo] Update Success',
+  props<{ payload: Todo }>()
 );
 
 export const complete = createAction(
@@ -36,3 +46,8 @@ export const uncompleteSuccess = createAction(
 );
 
 export const destroy = createAction('[Todo] Destroy', props<{ id: number }>());
+
+export const destroySuccess = createAction(
+  '[Todo] DestroySuccess',
+  props<{ id: number }>()
+);

@@ -23,7 +23,7 @@ export class TodoFormDialogComponent implements OnInit {
     this.dialogRef.close(null);
   }
 
-  validData() :boolean {
+  validData(): boolean {
     return this.data.name !== '';
   }
 }

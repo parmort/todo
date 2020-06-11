@@ -4,10 +4,6 @@ import * as TodoActions from './todo.actions';
 
 const initialState: Todo[] = [];
 
-function updateAll(_: Todo[], action: { payload: Todo[] }): Todo[] {
-  return action.payload;
-}
-
 function updateOne(state: Todo[], action: { payload: Todo }): Todo[] {
   return [
     ...state.filter(todo => todo.id !== action.payload.id),
@@ -17,9 +13,14 @@ function updateOne(state: Todo[], action: { payload: Todo }): Todo[] {
 
 const todoReducer = createReducer(
   initialState,
-  on(TodoActions.loadSuccess, updateAll),
+  on(TodoActions.loadSuccess, (_, action) => action.payload),
   on(TodoActions.completeSuccess, updateOne),
-  on(TodoActions.uncompleteSuccess, updateOne)
+  on(TodoActions.uncompleteSuccess, updateOne),
+  on(TodoActions.createSuccess, updateOne),
+  on(TodoActions.editSuccess, updateOne),
+  on(TodoActions.destroySuccess, (state, action) =>
+    state.filter(todo => todo.id !== action.id)
+  )
 );
 
 export function reducer(state: Todo[] | undefined, action: Action) {

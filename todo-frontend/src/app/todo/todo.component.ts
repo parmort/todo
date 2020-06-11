@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { timer } from 'rxjs';
 import { TodoService } from '../core/todo.service';
 import { TodoFormDialogComponent } from '../todo-form-dialog/todo-form-dialog.component';
 import { Todo } from '../core/todo/todo.model';
@@ -32,9 +31,7 @@ export class TodoComponent {
   }
 
   delete(): void {
-    this.todoService.deleteTodo(this.todo.id).subscribe(_ => {
-      this.update.emit('delete');
-    });
+    this.store.dispatch(TodoActions.destroy({ id: this.todo.id }));
   }
 
   edit(): void {
@@ -42,11 +39,11 @@ export class TodoComponent {
       data: { name: this.todo.name },
     });
 
-    formDialog.afterClosed().subscribe(res => {
-      if (!res) return;
-      this.todoService
-        .editTodo(this.todo.id, res)
-        .subscribe(_ => this.update.emit('edit'));
+    formDialog.afterClosed().subscribe(formData => {
+      if (!formData) return;
+      this.store.dispatch(
+        TodoActions.edit({ id: this.todo.id, data: formData })
+      );
     });
   }
 }

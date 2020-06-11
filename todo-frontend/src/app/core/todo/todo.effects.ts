@@ -43,5 +43,41 @@ export class TodoEffects {
     )
   );
 
+  createTodo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TodoActions.create),
+      mergeMap(formData =>
+        this.todoService.createTodo(formData).pipe(
+          map(todo => TodoActions.createSuccess({ payload: todo })),
+          catchError(_ => EMPTY)
+        )
+      )
+    )
+  );
+
+  editTodo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TodoActions.edit),
+      mergeMap(props =>
+        this.todoService.editTodo(props.id, props.data).pipe(
+          map(todo => TodoActions.editSuccess({ payload: todo })),
+          catchError(_ => EMPTY)
+        )
+      )
+    )
+  );
+
+  destroyTodo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TodoActions.destroy),
+      mergeMap(({ id }) =>
+        this.todoService.deleteTodo(id).pipe(
+          map(todo => TodoActions.destroySuccess({ id: todo.id })),
+          catchError(_ => EMPTY)
+        )
+      )
+    )
+  );
+
   constructor(private actions$: Actions, private todoService: TodoService) {}
 }
